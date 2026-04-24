@@ -17,7 +17,7 @@
 </a>
 </div>
 
-Official implementation of **"Video Patch Pruning: Integrating Temporal Priors for Efficient ViT Sparsity"**.
+Official implementation of **"Video Patch Pruning (VPP)"**.
 
 ---
 
@@ -29,7 +29,7 @@ Consequently, most methods remain computationally "dense" in the early stages of
 
 Our Video Patch Pruning approch (VPP) solves this by enabling pruning right after the first ViT block.
 
-How it works:
+How does VPP work:
 - <b>Mapping Selective Module:</b> We leverage high-quality, foreground-selective features from previous frames.
 - <b>Temporal Alignment:</b> These features are temporally aligned to the current frame.
 - <b>Instance Identification</b>: VPP avoids "blind spots" by sparsely sampling background tokens, ensuring new objects are detected even in highly sparse feature representations.
@@ -45,8 +45,8 @@ How it works:
 
 ---
 
-## Getting Started
-### Installation
+## 🚀 Getting Started
+### 🛠️ Installation
 We recommend using Conda to manage your dependencies. This ensures that the specific versions of PyTorch and CUDA required for MMCV are isolated.
 ```bash
 conda create -n vpp python=3.9 -y
@@ -57,7 +57,7 @@ conda install pytorch==1.11.0 torchvision==0.12.0 cudatoolkit=11.3 -c pytorch -y
 pip install -r requirements.txt
 ```
 
-### Dataset
+### 📂 Dataset
 
 Download the YouTube-VIS 2019/2021 datasets from [youtube-vos.org](https://youtube-vos.org/dataset/vis/).
 
@@ -73,7 +73,7 @@ data/youtube_vis/
     └── 📂 JPEGImages/       # Video frames (video_id/XXXXX.jpg)
 ```
 
-### Results
+### 📊 Results
 The following table summarizes the performance of our models across different YouTube-VIS 2021 versions, comparing dense baselines with various Patch-Pruned configurations.
 Checkpoints to the model are available at: [link](https://osf.io/u2x34/files/osfstorage)
 
@@ -87,13 +87,13 @@ Checkpoints to the model are available at: [link](https://osf.io/u2x34/files/osf
 | tiny       |        **40.9%**         |   40.9   |   47.6   |   43.6   |                     [link](https://osf.io/tg5ap/?action=download)                     | [download](https://osf.io/bwhge/?action=download) |
 
 
-### Evaluation
+### 🧪 Evaluation
 To evaluate the SViT-Adapter Small at 40% Patch Keep Ratio (PKR) on Youtube-Vis 2021, use:
 ```bash
 python tools/test.py configs/vis/vpp/vpp_vitTiny_4xb2_6e_0.4PKR_ytvis21.py --checkpoint checkpoints/vpp_vitAda_rovis_ytvis21/small/PKR=0.4/epoch_6.pth
 ```
 
-### Training
+### 🏋️ Training
 
 <b>Dense Training</b> 
 
@@ -122,7 +122,7 @@ Note: Checkpoints for the Mask2Former models pretrained on COCO 2017 are availab
 
 ---
 
-## Citation
+## 📜 Citation
 If you use this code in your research, please cite the following paper:
 ```
 @inproceedings{
