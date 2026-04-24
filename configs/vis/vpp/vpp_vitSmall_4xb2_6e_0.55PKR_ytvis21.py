@@ -1,16 +1,13 @@
 _base_ = [
-    '../rovis/rovis_mask2former_vitAdaTiny_ytvis21.py',
+    '../rovis/rovis_mask2former_vitAdaSmall_ytvis21.py',
 ]
 
 custom_imports = dict(imports=['custom_mmtrack', 'custom_mmdet'])
 
-path_model = 'checkpoints/dense_vitAda_rovis_ytvis21/tiny/epoch_6.pth'
-work_dir = 'output/vpp_vitTiny_4xb2_6e_0.55PKR'
+path_model = 'checkpoints/dense_vitAda_rovis_ytvis21/small/vitAda_small_ytvis21_dense_epoch_6.pth'
+work_dir = 'output/vpp_vitSmall_4xb2_6e_0.55PKR'
 
 #model
-num_things_classes = 40
-num_stuff_classes = 0
-num_classes = num_things_classes + num_stuff_classes
 model = dict(
     detector=dict(
         type='Mask2Former',
@@ -44,15 +41,6 @@ model = dict(
             #loss
             ratio_sm_sparsity_loss=40.,
             ratio_match_module_sparsity_loss=10.,
-        ),
-        panoptic_head=dict(
-                    num_things_classes=num_things_classes,
-                    num_stuff_classes=num_stuff_classes,
-                    loss_cls=dict(class_weight=[1.0] * num_classes + [0.1])
-        ),
-        panoptic_fusion_head = dict(
-            num_things_classes=num_things_classes,
-            num_stuff_classes=num_stuff_classes
         ),
         init_cfg=dict(_delete_=True),
     ),

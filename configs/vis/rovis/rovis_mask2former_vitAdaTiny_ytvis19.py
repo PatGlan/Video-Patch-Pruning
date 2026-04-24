@@ -1,12 +1,9 @@
-_base_ = ['./rovis_mask2former_r50_ytvis21.py']
+_base_ = ['./rovis_mask2former_r50_ytvis19.py']
 
 custom_imports = dict(imports=['custom_mmtrack', 'custom_mmdet'])
 
-#path_model = 'PATH_MODEL_PRETRAINED_ON_COCO2017'
-#path_model = 'https://dl.fbaipublicfiles.com/deit/deit_tiny_patch16_224-a1311bcf.pth'
-path_model = '/home/glandorf/projects/Video-Patch-Pruning/checkpoints/dense_vitAda_mask2former_coco2017/vitAda_tiny/iter_368750.pth'
-#work_dir = 'HERE_DEFINE_WORKDIR'
-work_dir = '../../myruns'
+path_model = 'checkpoints/dense_vitAda_mask2former_coco2017/vitAda_tiny/vitAda_tiny_coco2017_dense_iter_368750.pth'
+work_dir = 'output'
 
 model = dict(
     detector=dict(
@@ -35,13 +32,11 @@ model = dict(
         ),
         init_cfg=dict(
             type='Pretrained',
-            #checkpoint=path_model.replace('.pth', '_evo.pth')),
             checkpoint=path_model),
     ),
 )
 
 custom_hooks=[
-    #dict(type='UpdateSvitCkptHook', model_path=path_model, priority='HIGHEST'),
     dict(type='EmptyCacheHook'),
 ]
 
@@ -55,7 +50,7 @@ val_evaluator = [
     dict(
         _scope_= 'mmdet',
         type='CocoMetric_CovertVideo2Image',
-        ann_file=_base_.data_root + 'annotations/youtube_vis_2021_valid.json',
+        ann_file=_base_.data_root + 'annotations/youtube_vis_2019_valid.json',
         metric=['bbox', 'segm'],
         outfile_prefix=work_dir + '/results_for_coco_metric',
         format_only=False,

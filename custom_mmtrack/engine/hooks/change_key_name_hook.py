@@ -1,6 +1,6 @@
 
 
-from mmdet.registry import HOOKS
+from mmtrack.registry import HOOKS
 from mmengine.hooks import Hook
 
 import os
@@ -12,8 +12,8 @@ import torch
 
 @HOOKS.register_module()
 class ChangeKeyNameHook(Hook):
-    def __init__(self, model_path: str = None, ):
-        self.model_path = model_path
+    def __init__(self, model_path=None):
+        #self.model_path = model_path
 
         self.revise_keys = [(r'blocks.\d+.', r'\g<0>TransformerEncoderLayer.'),
                        (r'TransformerEncoderLayer.TransformerEncoderLayer.', r'TransformerEncoderLayer.'),
@@ -23,13 +23,15 @@ class ChangeKeyNameHook(Hook):
                        ('mlp.fc1', 'linear1'),
                        ('mlp.fc2', 'linear2')
                         ]
+        self.update_model_checkpoint(model_path)
+        #def before_run(self, runner):
+    def update_model_checkpoint(self, ckpt_path):
 
-    def before_run(self, runner):
-        target_file = self.model_path.replace('.pth', '_evo.pth')
-        if os.path.exists(target_file) or not os.path.exists(self.model_path):
-            return None
+        target_file = ckpt_path.replace('.pth', '_evo.pth')
+        #if os.path.exists(target_file) or not os.path.exists(ckpt_path):
+        #    return None
 
-        full_state_dict = torch.load(self.model_path)
+        full_state_dict = torch.load(ckpt_path)
         input_state_dict = full_state_dict['state_dict']
         output_state_dict = OrderedDict()
 
@@ -41,5 +43,6 @@ class ChangeKeyNameHook(Hook):
 
         full_state_dict['state_dict'] = output_state_dict
         torch.save(full_state_dict, target_file)
+
 
 

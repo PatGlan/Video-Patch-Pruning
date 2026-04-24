@@ -1,7 +1,7 @@
-_base_ = ['./rovis_mask2former_vitAdaTiny_tracker.py']
+_base_ = ['./rovis_mask2former_vitAdaTiny_ytvis21.py']
 
-#path_model = 'PATH_MODEL_PRETRAINED_ON_COCO2017'
-path_model = 'https://dl.fbaipublicfiles.com/deit/deit_small_patch16_224-cd65a155.pth'
+path_model = 'checkpoints/dense_vitAda_mask2former_coco2017/vitAda_small/vitAda_small_coco2017_dense_iter_368750.pth'
+work_dir = 'output'
 
 model = dict(
     detector=dict(
@@ -30,8 +30,7 @@ model = dict(
         ),
         init_cfg=dict(
             type='Pretrained',
-            checkpoint=path_model.replace('.pth', '_evo.pth')),
+            checkpoint=path_model
+        ),
     ),
 )
-
-_base_.custom_hooks[0]=dict(type='UpdateSvitCkptHook', model_path=path_model, priority='HIGHEST')

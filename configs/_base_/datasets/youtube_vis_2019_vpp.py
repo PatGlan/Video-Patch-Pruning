@@ -16,7 +16,7 @@ train_pipeline = [
             dict(type='mmdet.Resize', scale=img_size, keep_ratio=True),
             dict(type='mmdet.RandomFlip', prob=0.5),
         ]),
-    dict(type='PackTrackInputs', ref_prefix='ref', num_key_frames=1)
+    dict(type='PackTrackInputs_MultiRefImgs', ref_prefix='ref', num_key_frames=1, reduce_multiple_ref_imgs=False)
 ]
 
 test_pipeline = [
@@ -27,7 +27,7 @@ test_pipeline = [
         with_mask=True,
         with_bbox=True),
     dict(type='mmdet.Resize', scale=img_size, keep_ratio=True),
-    dict(type='PackTrackInputs', pack_single_img=True)
+    dict(type='PackTrackInputs_MultiRefImgs', pack_single_img=True)
 ]
 
 dataset_type = 'YouTubeVISDataset'
@@ -51,7 +51,7 @@ train_dataloader = dict(
         load_as_video=True,
         ref_img_sampler=dict(
             num_ref_imgs=1,
-            frame_range=100,
+            frame_range=5,
             filter_key_img=True,
             method='uniform')))
 val_dataloader = dict(

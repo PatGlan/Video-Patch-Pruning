@@ -1,6 +1,7 @@
 conda create -n vpp python=3.9
+conda activate vpp
 
-conda install pytorch==1.11.0 torchvision==0.12.0 cudatoolkit==11.3 -c pytorch
+conda install pytorch==1.11.0 torchvision==0.12.0  cudatoolkit=11.3 -c pytorch
 conda install mkl=2022.1.0
 
 pip install numpy==1.22.4
@@ -8,8 +9,8 @@ pip install timm==0.4.12
 
 pip install -U openmim
 mim install mmengine==0.10.7
-mim install mmcv==2.0.0.rc4
-mim install cls==1.0.0.rc6
+mim install mmcv==2.0.0rc4
+mim install mmcls==1.0.0rc6
 mim install mmdet==3.0.0rc5
 mim install mmtrack==1.0.0rc1
 

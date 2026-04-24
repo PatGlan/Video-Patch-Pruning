@@ -59,7 +59,7 @@ This approach enables highly efficient models using early-stage pruning that sta
 -->
 
 <p align="center">
-<img src="imgs/img_vs_video_patch_pruning.png"  width="500">
+<img src="imgs/img_vs_video_patch_pruning.png"  width="400">
 </p>
 <p align="center" style="font-size: 0.9em; color: gray;">
   <b>Figure 1:</b> Pruning Visualization. Comparison of removed tokens (black) between image-based (SVIT) and Video Patch Pruning (VPP) across model layers.
@@ -92,7 +92,7 @@ Note: Map-SM is universally applicable to spatio-temporal data, as its pruning m
 As demonstrated in Figure 3, VPP maintains robust performance in high-sparsity regimes where traditional image-based methods experience significant accuracy degradation.
 
 <p align="center">
-<img src="imgs/vis_performance.png"  width="500">
+<img src="imgs/vis_performance.png"  width="300">
 </p>
 <p align="center" style="font-size: 0.9em; color: gray;">
   <b>Figure 2:</b> Video Instance Segmentation Performance. mAP vs. efficiency trade-offs on YouTube-VIS 2019 and 2021 benchmarks.
